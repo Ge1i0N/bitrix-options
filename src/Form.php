@@ -118,6 +118,7 @@ class Form
                     $input = $form->getHtml();
 
 
+                    $note = '';
                     if (isset($property['FIELDS']['NOTES']) && $property['FIELDS']['NOTES'] != '')
                         $note = '<span data-hint="' . htmlspecialchars($property['FIELDS']['NOTES']) . '"></span>';
 
