@@ -22,7 +22,7 @@ class Form
     private $tabs = [];
     private $options = [];
 
-    private $types = [
+    private static $types = [
         'CHECKBOX' => Types\Checkbox::class,
         'COLORPICKER' => Types\Colorpicker::class,
         'DROPDOWN' => Types\Dropdown::class,
@@ -31,6 +31,11 @@ class Form
         'STRING' => Types\Text::class,
         'TEXTAREA' => Types\Textarea::class,
     ];
+
+    public static function typesRegister(array $array): void
+    {
+        static::$types = array_merge(static::$types, $array);
+    }
 
     public static function generate($moduleId, $tabs): void
     {
@@ -106,8 +111,8 @@ class Form
                         ]
                     );
 
-                    if (array_key_exists($property['TYPE'], $this->types)) {
-                        $form = new $this->types[$property['TYPE']];
+                    if (array_key_exists($property['TYPE'], static::$types)) {
+                        $form = new static::$types[$property['TYPE']];
                     } else {
                         $form = new Types\Text();
                     }
@@ -121,7 +126,6 @@ class Form
                     $note = '';
                     if (isset($property['FIELDS']['NOTES']) && $property['FIELDS']['NOTES'] != '')
                         $note = '<span data-hint="' . htmlspecialchars($property['FIELDS']['NOTES']) . '"></span>';
-
 
                     $properties[$tabId][$groupName]['TITLE'] = $group['TITLE'];
                     $properties[$tabId][$groupName]['OPTIONS'][] = '<tr><td valign="top">' . $property['FIELDS']['TITLE'] . $note . '</td><td nowrap>' . $input . '</td></tr>';
