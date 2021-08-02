@@ -22,6 +22,23 @@
     Gelion\BitrixOptions\Form::generate('youmodule.id', $options);
     ```
 
+## Пример установки в свой модуль для маркетплейса
+1. Скопировать пакет к себе в модуль
+2. Зарегистрировать классы модуля в файле `include.php`
+    ```php
+    Bitrix\Main\Loader::registerAutoLoadClasses('youmodule.id', [
+        'Gelion\\BitrixOptions\\Form'               => '/lib/Form.php',
+        'Gelion\\BitrixOptions\\TypeBase'           => '/lib/TypeBase.php',
+        'Gelion\\BitrixOptions\\Types\\Checkbox'    => '/lib/Types/Checkbox.php',
+        'Gelion\\BitrixOptions\\Types\\Colorpicker' => '/lib/Types/Colorpicker.php',
+        'Gelion\\BitrixOptions\\Types\\Dropdown'    => '/lib/Types/Dropdown.php',
+        'Gelion\\BitrixOptions\\Types\\MultiSelect' => '/lib/Types/MultiSelect.php',
+        'Gelion\\BitrixOptions\\Types\\Number'      => '/lib/Types/Number.php',
+        'Gelion\\BitrixOptions\\Types\\Text'        => '/lib/Types/Text.php',
+        'Gelion\\BitrixOptions\\Types\\Textarea'    => '/lib/Types/Textarea.php',
+    ]);
+    ```
+
 ## Структура параметров в генераторе
 В генератор передаётся массив табов, групп и опций на странице настроек.
 
