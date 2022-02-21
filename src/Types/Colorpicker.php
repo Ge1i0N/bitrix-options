@@ -3,9 +3,8 @@
 namespace Gelion\BitrixOptions\Types;
 
 use Gelion\BitrixOptions\TypeBase;
-use Gelion\BitrixOptions\TypeInterface;
 
-class Colorpicker extends TypeBase implements TypeInterface
+class Colorpicker extends TypeBase
 {
     public function getHtml(): string
     {

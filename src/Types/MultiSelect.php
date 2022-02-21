@@ -3,11 +3,10 @@
 namespace Gelion\BitrixOptions\Types;
 
 use Bitrix\Main\Localization\Loc;
-use Gelion\BitrixOptions\TypeInterface;
 
 Loc::loadMessages(__FILE__);
 
-class MultiSelect extends Dropdown implements TypeInterface
+class MultiSelect extends Dropdown
 {
     public function getHtml(): string
     {

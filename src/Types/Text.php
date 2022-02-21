@@ -3,9 +3,8 @@
 namespace Gelion\BitrixOptions\Types;
 
 use Gelion\BitrixOptions\TypeBase;
-use Gelion\BitrixOptions\TypeInterface;
 
-class Text extends TypeBase implements TypeInterface
+class Text extends TypeBase
 {
     public function setDefault(): void
     {

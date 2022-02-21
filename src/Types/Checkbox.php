@@ -3,9 +3,8 @@
 namespace Gelion\BitrixOptions\Types;
 
 use Gelion\BitrixOptions\TypeBase;
-use Gelion\BitrixOptions\TypeInterface;
 
-class Checkbox extends TypeBase implements TypeInterface
+class Checkbox extends TypeBase
 {
     public function getHtml(): string
     {

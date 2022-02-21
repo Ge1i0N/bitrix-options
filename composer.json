@@ -1,22 +1,22 @@
 {
-  "name": "ge1i0n/bitrix-options",
-  "license": "MIT",
-  "keywords": [
-    "bitrix"
-  ],
-  "authors": [
-    {
-      "name": "Sevalnev Gennadiy",
-      "email": "gennadiy.sevalnev@mail.ru"
+    "name": "ge1i0n/bitrix-options",
+    "license": "MIT",
+    "keywords": [
+        "bitrix"
+    ],
+    "authors": [
+        {
+            "name": "Sevalnev Gennadiy",
+            "email": "gennadiy.sevalnev@mail.ru"
+        }
+    ],
+    "homepage": "https://github.com/ge1i0n/bitrix-options",
+    "require": {
+        "php": ">=7.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gelion\\BitrixOptions\\": "src/"
+        }
     }
-  ],
-  "homepage": "https://github.com/ge1i0n/bitrix-options",
-  "require": {
-    "php": ">=7.3.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Gelion\\BitrixOptions\\": "src/"
-    }
-  }
 }

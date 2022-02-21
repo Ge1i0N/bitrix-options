@@ -2,9 +2,7 @@
 
 namespace Gelion\BitrixOptions\Types;
 
-use Gelion\BitrixOptions\TypeInterface;
-
-class Number extends Text implements TypeInterface
+class Number extends Text
 {
     public function getHtml(): string
     {

@@ -3,12 +3,11 @@
 namespace Gelion\BitrixOptions\Types;
 
 use Gelion\BitrixOptions\TypeBase;
-use Gelion\BitrixOptions\TypeInterface;
 use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
-class Dropdown extends TypeBase implements TypeInterface
+class Dropdown extends TypeBase
 {
     public function getHtml(): string
     {

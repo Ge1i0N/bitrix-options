@@ -3,9 +3,8 @@
 namespace Gelion\BitrixOptions\Types;
 
 use Gelion\BitrixOptions\TypeBase;
-use Gelion\BitrixOptions\TypeInterface;
 
-class Textarea extends TypeBase implements TypeInterface
+class Textarea extends TypeBase
 {
     private $modificator = [
         'no-border',
