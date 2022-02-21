@@ -30,6 +30,7 @@ class Form
         'NUMBER' => Types\Number::class,
         'STRING' => Types\Text::class,
         'TEXTAREA' => Types\Textarea::class,
+        'HTMLEDITOR' => Types\HtmlEditor::class,
     ];
 
     public static function typesRegister(array $array): void
@@ -74,7 +75,13 @@ class Form
 
             if ($option['TYPE'] == 'CHECKBOX' && $value !== 'Y')
                 $value = 'N';
-            elseif (is_array($value))
+            elseif ($option['TYPE'] == 'HTMLEDITOR') {
+                $type = $_REQUEST[$name . '_TYPE'];
+                if (!in_array($type, ['text', 'html']))
+                    $type = 'html';
+
+                $value = serialize(['type' => $type, 'value' => $value]);
+            } elseif (is_array($value))
                 $value = serialize($value);
 
             Option::set($this->moduleId, $name, $value);
