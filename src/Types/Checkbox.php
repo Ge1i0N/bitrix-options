@@ -12,7 +12,7 @@ class Checkbox extends TypeBase
 
         $value = htmlspecialchars($this->fields['VALUE']);
         $name = htmlspecialchars($this->fields['NAME']);
-        $checked = $value ? 'checked' : '';
+        $checked = $value === 'Y' ? 'checked' : '';
 
         return <<<HTML
             <div id="{$name}-block" class="{$name}-raw">

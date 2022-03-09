@@ -73,8 +73,8 @@ class Form
         foreach ($this->options as $name => $option) {
             $value = $_REQUEST[$name];
 
-            if ($option['TYPE'] == 'CHECKBOX' && $value !== 'Y')
-                $value = 'N';
+            if ($option['TYPE'] == 'CHECKBOX')
+                $value = is_null($value) ? 'N' : 'Y';
             elseif ($option['TYPE'] == 'HTMLEDITOR') {
                 $type = $_REQUEST[$name . '_TYPE'];
                 if (!in_array($type, ['text', 'html']))
