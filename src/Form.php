@@ -71,18 +71,8 @@ class Form
     private function saveOptions(): void
     {
         foreach ($this->options as $name => $option) {
-            $value = $_REQUEST[$name];
-
-            if ($option['TYPE'] == 'CHECKBOX')
-                $value = is_null($value) ? 'N' : 'Y';
-            elseif ($option['TYPE'] == 'HTMLEDITOR') {
-                $type = $_REQUEST[$name . '_TYPE'];
-                if (!in_array($type, ['text', 'html']))
-                    $type = 'html';
-
-                $value = serialize(['type' => $type, 'value' => $value]);
-            } elseif (is_array($value))
-                $value = serialize($value);
+            $typeClass = $this->getOptionClass($name, $option);
+            $value = $typeClass->getValueString();
 
             Option::set($this->moduleId, $name, $value);
         }
@@ -91,10 +81,10 @@ class Form
     private function setCurrentValues(): void
     {
         foreach ($this->options as $name => $option) {
-            $this->optionValues[$name] = Option::get($this->moduleId, $name, $option['FIELDS']['DEFAULT']);
-            if (in_array($option['TYPE'], ['MULTISELECT'])) {
-                $this->optionValues[$name] = unserialize($this->optionValues[$name]);
-            }
+            $option['FIELDS']['VALUE'] = Option::get($this->moduleId, $name, $option['FIELDS']['DEFAULT']);
+            $typeClass = $this->getOptionClass($name, $option, true);
+
+            $this->optionValues[$name] = $typeClass->parseValueString();
         }
     }
 
@@ -197,5 +187,20 @@ class Form
             HTML;
             $tabControl->End();
         }
+    }
+
+    private function getOptionClass(string $name, array $option, bool $saved = false): object
+    {
+        $className = is_null(static::$types[$option['TYPE']]) ?
+            Types\Text::class : static::$types[$option['TYPE']];
+
+        $class = new $className;
+
+        $class->setFields([
+            'NAME' => $name,
+            'VALUE' => $saved ? $option['FIELDS']['VALUE'] : $_REQUEST[$name],
+            'TYPE' => $_REQUEST[$name . '_TYPE'], // Htmleditor only
+        ]);
+        return $class;
     }
 }

@@ -41,4 +41,14 @@ class MultiSelect extends Dropdown
 
         return $string;
     }
+
+    public function parseValueString()
+    {
+        return unserialize($this->fields['VALUE']);
+    }
+
+    public function getValueString(): string
+    {
+        return serialize($this->fields['VALUE']);
+    }
 }

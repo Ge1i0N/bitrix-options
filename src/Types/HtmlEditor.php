@@ -47,4 +47,12 @@ class HtmlEditor extends TypeBase
         ob_end_clean();
         return $html;
     }
+
+    public function getValueString(): string
+    {
+        if (!in_array($this->fields['TYPE'], ['text', 'html']))
+            $this->fields['TYPE'] = 'html';
+
+        return serialize(['type' => $this->fields['TYPE'], 'value' => $this->fields['VALUE']]);
+    }
 }

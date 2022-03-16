@@ -29,4 +29,14 @@ class Checkbox extends TypeForm
             </div>
         HTML;
     }
+
+    public function parseValueString()
+    {
+        return strval($this->fields['VALUE']);
+    }
+
+    public function getValueString(): string
+    {
+        return is_null($this->fields['VALUE']) ? 'N' : 'Y';
+    }
 }
