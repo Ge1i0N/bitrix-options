@@ -19,6 +19,7 @@ class Form
     public $optionValues = [];
 
     private $moduleId = '';
+    private $formName = '';
     private $tabs = [];
     private $options = [];
 
@@ -47,6 +48,7 @@ class Form
     public function __construct($moduleId, $tabs)
     {
         $this->moduleId = $moduleId;
+        $this->formName = str_replace('.', '_', $moduleId);
         $this->tabs = $tabs;
         $this->options = $this->getOptions();
 
@@ -145,7 +147,7 @@ class Form
             $language = LANGUAGE_ID;
 
             print <<<HTML
-                <form id="{$this->moduleId}" name="{$this->moduleId}" method="POST" action="{$APPLICATION->GetCurPage()}?mid={$this->moduleId}&lang={$language}" enctype="multipart/form-data">
+                <form id="{$this->moduleId}" name="{$this->formName}" method="POST" action="{$APPLICATION->GetCurPage()}?mid={$this->moduleId}&lang={$language}" enctype="multipart/form-data">
             HTML;
             print bitrix_sessid_post();
 
