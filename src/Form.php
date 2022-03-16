@@ -32,6 +32,7 @@ class Form
         'STRING' => Types\Text::class,
         'TEXTAREA' => Types\Textarea::class,
         'HTMLEDITOR' => Types\HtmlEditor::class,
+        'CONDITIONS' => Types\Conditions::class,
     ];
 
     public static function typesRegister(array $array): void
@@ -107,6 +108,7 @@ class Form
                         [
                             'VALUE' => $this->optionValues[$option],
                             'NAME' => $option,
+                            'FORM_NAME' => $this->formName, // Conditions only
                         ]
                     );
 
