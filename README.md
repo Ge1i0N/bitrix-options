@@ -28,10 +28,14 @@
     ```php
     Bitrix\Main\Loader::registerAutoLoadClasses('youmodule.id', [
         'Gelion\\BitrixOptions\\Form'               => '/lib/Form.php',
+        'Gelion\\BitrixOptions\\TypeInterface'           => '/lib/TypeInterface.php',
         'Gelion\\BitrixOptions\\TypeBase'           => '/lib/TypeBase.php',
+        'Gelion\\BitrixOptions\\TypeForm'           => '/lib/TypeForm.php',
         'Gelion\\BitrixOptions\\Types\\Checkbox'    => '/lib/Types/Checkbox.php',
         'Gelion\\BitrixOptions\\Types\\Colorpicker' => '/lib/Types/Colorpicker.php',
+        'Gelion\\BitrixOptions\\Types\\Conditions'  => '/lib/Types/Conditions.php',
         'Gelion\\BitrixOptions\\Types\\Dropdown'    => '/lib/Types/Dropdown.php',
+        'Gelion\\BitrixOptions\\Types\\HtmlEditor'  => '/lib/Types/HtmlEditor.php',
         'Gelion\\BitrixOptions\\Types\\MultiSelect' => '/lib/Types/MultiSelect.php',
         'Gelion\\BitrixOptions\\Types\\Number'      => '/lib/Types/Number.php',
         'Gelion\\BitrixOptions\\Types\\Text'        => '/lib/Types/Text.php',
