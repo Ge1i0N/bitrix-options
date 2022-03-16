@@ -2,12 +2,9 @@
 
 namespace Gelion\BitrixOptions\Types;
 
-use Gelion\BitrixOptions\TypeBase;
-use Bitrix\Main\Localization\Loc;
+use Gelion\BitrixOptions\TypeForm;
 
-Loc::loadMessages(__FILE__);
-
-class Dropdown extends TypeBase
+class Dropdown extends TypeForm
 {
     public function getHtml(): string
     {

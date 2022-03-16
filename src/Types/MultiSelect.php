@@ -2,10 +2,6 @@
 
 namespace Gelion\BitrixOptions\Types;
 
-use Bitrix\Main\Localization\Loc;
-
-Loc::loadMessages(__FILE__);
-
 class MultiSelect extends Dropdown
 {
     public function getHtml(): string
@@ -36,7 +32,7 @@ class MultiSelect extends Dropdown
     {
         $string = '';
         if (empty($options))
-            $string .= '<option value="" selected>' . Loc::getMessage('empty_array') . '</option>';
+            $string .= '<option value="" selected></option>';
         else
             foreach ($options as $option) {
                 $selected = (!empty($value) && in_array($option['VALUE'], $value)) ? 'selected' : '';

@@ -2,9 +2,9 @@
 
 namespace Gelion\BitrixOptions\Types;
 
-use Gelion\BitrixOptions\TypeBase;
+use Gelion\BitrixOptions\TypeForm;
 
-class Colorpicker extends TypeBase
+class Colorpicker extends TypeForm
 {
     public function getHtml(): string
     {
@@ -31,7 +31,6 @@ class Colorpicker extends TypeBase
                     </div>
                 </div>
             </div>
-           
         HTML;
     }
 }

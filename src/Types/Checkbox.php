@@ -2,9 +2,9 @@
 
 namespace Gelion\BitrixOptions\Types;
 
-use Gelion\BitrixOptions\TypeBase;
+use Gelion\BitrixOptions\TypeForm;
 
-class Checkbox extends TypeBase
+class Checkbox extends TypeForm
 {
     public function getHtml(): string
     {

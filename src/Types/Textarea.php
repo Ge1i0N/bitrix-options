@@ -2,9 +2,9 @@
 
 namespace Gelion\BitrixOptions\Types;
 
-use Gelion\BitrixOptions\TypeBase;
+use Gelion\BitrixOptions\TypeForm;
 
-class Textarea extends TypeBase
+class Textarea extends TypeForm
 {
     private $modificator = [
         'no-border',

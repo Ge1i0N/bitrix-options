@@ -2,9 +2,9 @@
 
 namespace Gelion\BitrixOptions\Types;
 
-use Gelion\BitrixOptions\TypeBase;
+use Gelion\BitrixOptions\TypeForm;
 
-class Text extends TypeBase
+class Text extends TypeForm
 {
     public function setDefault(): void
     {
