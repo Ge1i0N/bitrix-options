@@ -15,9 +15,9 @@ class Number extends Text
         $disabled = $this->fields['DISABLED'] ? 'disabled' : '';
         $readonly = $this->fields['READONLY'] ? 'readonly' : '';
         $autocomplete = $this->fields['autocomplete'] ? 'on' : 'off';
-        $step = $this->fields['STEP'] ? htmlspecialchars($this->fields['STEP']) : 1;
-        $min = $this->fields['MIN'] ? htmlspecialchars($this->fields['MIN']) : '';
-        $max = $this->fields['MAX'] ? htmlspecialchars($this->fields['MAX']) : '';
+        $step = isset($this->fields['STEP']) ? htmlspecialchars($this->fields['STEP']) : 1;
+        $min = isset($this->fields['MIN']) ? htmlspecialchars($this->fields['MIN']) : '';
+        $max = isset($this->fields['MAX']) ? htmlspecialchars($this->fields['MAX']) : '';
 
         return <<<HTML
             <div id="{$name}-block" class="{$name}-raw">
