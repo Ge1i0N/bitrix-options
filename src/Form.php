@@ -171,6 +171,7 @@ class Form
             }
 
             $tabControl->Buttons();
+            $tabControl->End();
 
             $applyText = Loc::getMessage('MAIN_OPT_APPLY');
             print <<<HTML
@@ -189,7 +190,6 @@ class Form
                 }
                 </style>
             HTML;
-            $tabControl->End();
         }
     }
 
