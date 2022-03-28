@@ -24,11 +24,11 @@
 
 ## Пример установки в свой модуль для маркетплейса
 1. Скопировать пакет к себе в модуль
-2. Зарегистрировать классы модуля в файле `include.php`
+2. Зарегистрировать классы модуля в файле `include.php`, прописав корректные пути к классам.
     ```php
     Bitrix\Main\Loader::registerAutoLoadClasses('youmodule.id', [
         'Gelion\\BitrixOptions\\Form'               => '/lib/Form.php',
-        'Gelion\\BitrixOptions\\TypeInterface'           => '/lib/TypeInterface.php',
+        'Gelion\\BitrixOptions\\TypeInterface'      => '/lib/TypeInterface.php',
         'Gelion\\BitrixOptions\\TypeBase'           => '/lib/TypeBase.php',
         'Gelion\\BitrixOptions\\TypeForm'           => '/lib/TypeForm.php',
         'Gelion\\BitrixOptions\\Types\\Checkbox'    => '/lib/Types/Checkbox.php',
@@ -98,7 +98,6 @@ $options = [
         'STEP' => 1,
         'MIN' => 0,
         'MAX' => 100,
-        'MAX' => 100,
     ],
 ],
 ```
@@ -130,7 +129,7 @@ $options = [
     'TYPE' => 'CHECKBOX',
     'FIELDS' => [
         'TITLE' => 'Поле "Чекбокс"',
-        'DEFAULT' => true,
+        'DEFAULT' => 'Y',
         'NOTES' => 'Это подсказка к полю "Чекбокс"',
     ],
 ],
