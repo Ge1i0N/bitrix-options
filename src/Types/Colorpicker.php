@@ -23,6 +23,7 @@ class Colorpicker extends TypeForm
                         {$tag}
                         <input  type="color"
                                 class="ui-ctl-element"
+                                style="flex: none"
                                 name="{$name}"
                                 value="{$value}"
                                 {$disabled}

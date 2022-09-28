@@ -129,7 +129,7 @@ class Form
                         $note = '<span data-hint="' . htmlspecialchars($property['FIELDS']['NOTES']) . '"></span>';
 
                     $properties[$tabId][$groupName]['TITLE'] = $group['TITLE'];
-                    $properties[$tabId][$groupName]['OPTIONS'][] = '<tr><td valign="top">' . $property['FIELDS']['TITLE'] . $note . '</td><td nowrap>' . $input . '</td></tr>';
+                    $properties[$tabId][$groupName]['OPTIONS'][] = '<tr><td>' . $property['FIELDS']['TITLE'] . $note . '</td><td nowrap>' . $input . '</td></tr>';
                     $properties[$tabId][$groupName]['OPTIONS_SORT'][] = $property['SORT'];
                 }
             }
@@ -158,9 +158,12 @@ class Form
 
                 foreach ($groups as $groupId => $group) {
                     if (count($group['OPTIONS_SORT']) > 0) {
-                        print <<<HTML
-                            <tr class="heading"><td colspan="2"><b>{$group['TITLE']}</b></td></tr>
-                        HTML;
+
+                        if (strlen($group['TITLE']) > 0) {
+                            print <<<HTML
+                                <tr class="heading"><td colspan="2"><b>{$group['TITLE']}</b></td></tr>
+                            HTML;
+                        }
 
                         array_multisort($group['OPTIONS_SORT'], $group['OPTIONS']);
 
