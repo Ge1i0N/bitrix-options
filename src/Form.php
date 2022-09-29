@@ -8,6 +8,7 @@ use Bitrix\Main\UI;
 use CAdminTabControl;
 use Gelion\BitrixOptions\Types;
 
+UI\Extension::load('ui.alerts');
 UI\Extension::load('ui.forms');
 UI\Extension::load('ui.buttons');
 UI\Extension::load('ui.hint');
@@ -24,6 +25,7 @@ class Form
     private $options = [];
 
     private static $types = [
+        'ALERT' => Types\Alert::class,
         'CHECKBOX' => Types\Checkbox::class,
         'COLORPICKER' => Types\Colorpicker::class,
         'DROPDOWN' => Types\Dropdown::class,
@@ -129,8 +131,13 @@ class Form
                         $note = '<span data-hint="' . htmlspecialchars($property['FIELDS']['NOTES']) . '"></span>';
 
                     $properties[$tabId][$groupName]['TITLE'] = $group['TITLE'];
-                    $properties[$tabId][$groupName]['OPTIONS'][] = '<tr><td>' . $property['FIELDS']['TITLE'] . $note . '</td><td nowrap>' . $input . '</td></tr>';
                     $properties[$tabId][$groupName]['OPTIONS_SORT'][] = $property['SORT'];
+
+                    if ($property['TYPE'] !== 'ALERT') {
+                        $properties[$tabId][$groupName]['OPTIONS'][] = '<tr><td>' . $property['FIELDS']['TITLE'] . $note . '</td><td nowrap>' . $input . '</td></tr>';
+                    } else {
+                        $properties[$tabId][$groupName]['OPTIONS'][] = '<tr><td colspan="2">' . $input . '</td></tr>';
+                    }
                 }
             }
 

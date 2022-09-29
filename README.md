@@ -31,6 +31,7 @@
         'Gelion\\BitrixOptions\\TypeInterface'      => '/lib/TypeInterface.php',
         'Gelion\\BitrixOptions\\TypeBase'           => '/lib/TypeBase.php',
         'Gelion\\BitrixOptions\\TypeForm'           => '/lib/TypeForm.php',
+        'Gelion\\BitrixOptions\\Types\\Alert'       => '/lib/Types/Alert.php',
         'Gelion\\BitrixOptions\\Types\\Checkbox'    => '/lib/Types/Checkbox.php',
         'Gelion\\BitrixOptions\\Types\\Colorpicker' => '/lib/Types/Colorpicker.php',
         'Gelion\\BitrixOptions\\Types\\Conditions'  => '/lib/Types/Conditions.php',
@@ -226,6 +227,18 @@ $options = [
 ],
 ```
 
+### Сообщения
+Эта опция ничего не сохраняет в базу данных, но позволяет выводить информационные сообщения на странице настроек. Опция имеет свои собственные параметры о которых можно прочесть ниже.
+```php
+'PROP_ID' => [
+    'SORT' => 100,
+    'TYPE' => 'ALERT',
+    'FIELDS' => [
+        'TITLE' => 'Поле "Сообщения"',
+    ],
+],
+```
+
 ## Модификаторы опций
 Для опций категории "Формы" можно передать дополнительные параметры, влияющие на отображение формы на странице. Более подробно о принимаемых параметрах и их значениях можно узнать в [документации Bitrix](https://dev.1c-bitrix.ru/api_d7/bitrix/ui/forms/common.php)
 Дополнительно доступные параметры пропасаны в базовом классе.
@@ -239,6 +252,19 @@ $options = [
         'COLOR' => 'default',
         'TAGCOLOR' => 'default',
         'MODIFICATOR' => false,
+    ],
+],
+```
+
+Параметры по умолчанию для опции "Сообщения". О доступных параметрах  значениях можно узнать в [документации Bitrix](https://dev.1c-bitrix.ru/api_d7/bitrix/ui/messages/alerts.php).
+```php
+'PROP_ID' => [
+    'FIELDS' => [],
+    'PARAMS' => [
+        'DISPLAY' => false,
+        'HEIGHT' => false,
+        'COLOR' => 'default',
+        'ICON' => false,
     ],
 ],
 ```
