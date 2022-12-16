@@ -49,14 +49,16 @@
 
 ```php
 $options = [
-    'DIV' => 'settings',
-    'TAB' => 'Новая вкладка',
-    'TITLE' => 'Новая вкладка',
-    'ICON' => '',
-    'GROUPS' => [
-        'GROUP_CODE' => [
-            'TITLE' => 'Название группы',
-            'OPTIONS' => []
+    [
+        'DIV' => 'settings',
+        'TAB' => 'Новая вкладка',
+        'TITLE' => 'Новая вкладка',
+        'ICON' => '',
+        'GROUPS' => [
+            'GROUP_CODE' => [
+                'TITLE' => 'Название группы',
+                'OPTIONS' => []
+            ],
         ],
     ],
 ];
