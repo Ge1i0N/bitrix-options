@@ -35,7 +35,7 @@ class Dropdown extends TypeForm
         $string = '';
         if (!empty($options))
             foreach ($options as $option) {
-                $selected = (!is_null($value) && $option['VALUE'] === $value) ? 'selected' : '';
+                $selected = (!is_null($value) && $option['VALUE'] == $value) ? 'selected' : '';
                 $string .= '<option value="' . $option['VALUE'] . '"'  . $selected . '>' . $option['TITLE'] . '</option>';
             }
 
