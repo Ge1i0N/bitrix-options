@@ -8,9 +8,4 @@ enum Display: string
 {
     case INLINE = 'ui-ctl-inline';
     case BLOCK  = 'ui-ctl-block';
-
-    public function toString(): ?string
-    {
-        return $this->value;
-    }
 }

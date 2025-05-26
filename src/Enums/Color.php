@@ -12,9 +12,4 @@ enum Color: string
     case WARNING  = 'ui-ctl-warning';
     case DANGER   = 'ui-ctl-danger';
     case DISABLED = 'ui-ctl-disabled';
-
-    public function toString(): ?string
-    {
-        return $this->value;
-    }
 }

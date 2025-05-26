@@ -11,7 +11,7 @@ trait WithStyleClass
         $result = '';
 
         foreach ($this->getStyleClassProperties() as $prop) {
-            $result .= $this->{$prop}?->toString() ?? '';
+            $result .= $this->{$prop}?->value ?? '';
         }
 
         return $result;

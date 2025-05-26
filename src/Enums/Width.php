@@ -13,9 +13,4 @@ enum Width: string
     case FULL    = 'ui-ctl-w100';
     case AUTO    = 'ui-ctl-wa';
     case DEFAULT = 'ui-ctl-wd';
-
-    public function toString(): ?string
-    {
-        return $this->value;
-    }
 }
