@@ -2,7 +2,9 @@
     "name": "ge1i0n/bitrix-options",
     "license": "MIT",
     "keywords": [
-        "bitrix"
+        "bitrix",
+        "bitrix-settings",
+        "bitrix-options"
     ],
     "authors": [
         {
@@ -12,7 +14,8 @@
     ],
     "homepage": "https://github.com/ge1i0n/bitrix-options",
     "require": {
-        "php": ">=7.3.0"
+        "php": ">=8.0",
+        "ext-mbstring": "*"
     },
     "autoload": {
         "psr-4": {
