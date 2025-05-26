@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gelion\BitrixOptions\Traits;
 
-use Gelion\BitrixOptions\Enum\TagColor;
+use Gelion\BitrixOptions\Enums\TagColor;
 
 trait WithTag
 {

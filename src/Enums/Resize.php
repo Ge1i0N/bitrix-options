@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gelion\BitrixOptions\Enum;
+namespace Gelion\BitrixOptions\Enums;
 
 enum Resize: string
 {

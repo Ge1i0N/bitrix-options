@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Gelion\BitrixOptions\Fields;
 
-use Gelion\BitrixOptions\Enum\AlertIcon;
-use Gelion\BitrixOptions\Enum\AlertSize;
-use Gelion\BitrixOptions\Enum\AlertTextPosition;
+use Gelion\BitrixOptions\Enums\AlertIcon;
+use Gelion\BitrixOptions\Enums\AlertSize;
+use Gelion\BitrixOptions\Enums\AlertTextPosition;
 use Gelion\BitrixOptions\Traits\WithColor;
 use Gelion\BitrixOptions\Traits\WithDisplayWithoutValue;
 use Gelion\BitrixOptions\Traits\WithModuleId;

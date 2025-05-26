@@ -6,10 +6,10 @@ namespace Gelion\BitrixOptions\Fields;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Config\Option;
-use Gelion\BitrixOptions\Enum\Display;
-use Gelion\BitrixOptions\Enum\Height;
-use Gelion\BitrixOptions\Enum\TextStyle;
-use Gelion\BitrixOptions\Enum\Width;
+use Gelion\BitrixOptions\Enums\Display;
+use Gelion\BitrixOptions\Enums\Height;
+use Gelion\BitrixOptions\Enums\TextStyle;
+use Gelion\BitrixOptions\Enums\Width;
 use Gelion\BitrixOptions\Traits\WithColor;
 use Gelion\BitrixOptions\Traits\WithHint;
 use Gelion\BitrixOptions\Traits\WithModuleId;

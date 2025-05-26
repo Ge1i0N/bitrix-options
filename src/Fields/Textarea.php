@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gelion\BitrixOptions\Fields;
 
-use Gelion\BitrixOptions\Enum\Resize;
+use Gelion\BitrixOptions\Enums\Resize;
 
 class Textarea extends Text
 {

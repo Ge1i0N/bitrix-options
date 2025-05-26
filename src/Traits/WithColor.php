@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gelion\BitrixOptions\Traits;
 
-use Gelion\BitrixOptions\Enum\Color;
+use Gelion\BitrixOptions\Enums\Color;
 
 trait WithColor
 {
