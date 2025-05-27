@@ -14,7 +14,7 @@
     ],
     "homepage": "https://github.com/ge1i0n/bitrix-options",
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-mbstring": "*"
     },
     "autoload": {
