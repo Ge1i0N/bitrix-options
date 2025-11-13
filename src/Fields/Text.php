@@ -80,7 +80,6 @@ class Text
         if (!$moduleId) return $this;
 
         $value = $request->get($this->key);
-        if (!$value) return $this;
 
         Option::set($moduleId, $this->key, $value);
 
