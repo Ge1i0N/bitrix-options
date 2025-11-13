@@ -51,7 +51,6 @@ class HtmlEditor
         if (!$moduleId) return $this;
 
         $value = $request->get($this->key);
-        if (!$value) return $this;
 
         $type = $request->get($this->key . '_TYPE') ?? 'TEXT';
 
