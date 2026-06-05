@@ -1,0 +1,4 @@
+<?php
+
+// Bitrix runtime constants
+define('LANGUAGE_ID', 'ru');
