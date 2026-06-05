@@ -1,1 +1,7 @@
 .idea
+vendor
+*.cache
+*.bak
+composer.lock
+.phpunit.result.cache
+coverage/
