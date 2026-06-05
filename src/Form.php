@@ -13,16 +13,20 @@ Extension::load('ui.forms');
 Extension::load('ui.hint');
 Extension::load('ui.alerts');
 
-Loc::loadMessages($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/options.php');
+$documentRoot = is_string($_SERVER['DOCUMENT_ROOT'] ?? null) ? $_SERVER['DOCUMENT_ROOT'] : '';
+Loc::loadMessages($documentRoot . '/bitrix/modules/main/options.php');
 
+/** @phpstan-consistent-constructor */
 class Form
 {
+    /** @param Tab[] $tabs */
     public function __construct(
         public string $moduleId,
         public array $tabs,
     ) {
     }
 
+    /** @param Tab[] $tabs */
     public static function make(string $moduleId, array $tabs): void
     {
         $instance = new static($moduleId, $tabs);
@@ -41,6 +45,10 @@ class Form
         }
     }
 
+    /**
+     * @param Tab[] $tabs
+     * @return array<string, string>[]
+     */
     private function getTabsFormated(array $tabs): array
     {
         $result = [];
@@ -70,11 +78,18 @@ class Form
             LANGUAGE_ID
         );
 
+        $escapedModuleId = htmlspecialchars($this->moduleId, ENT_QUOTES, 'UTF-8');
+        $escapedFormName = htmlspecialchars($formName, ENT_QUOTES, 'UTF-8');
+        $escapedAction = htmlspecialchars(
+            sprintf('%s?mid=%s&lang=%s', $APPLICATION->GetCurPage(), urlencode($this->moduleId), LANGUAGE_ID),
+            ENT_QUOTES, 'UTF-8'
+        );
+
         $result = <<<HTML
-            <form   id="$this->moduleId"
-                    name="$formName"
+            <form   id="$escapedModuleId"
+                    name="$escapedFormName"
                     method="POST"
-                    action="$action"
+                    action="$escapedAction"
                     enctype="multipart/form-data">
             HTML;
         $result .= bitrix_sessid_post();

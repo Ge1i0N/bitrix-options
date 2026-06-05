@@ -38,7 +38,7 @@ class Condition extends Text
         return <<<HTML
             <tr>
                 <td>
-                    $this->title
+                    {$this->escape((string)$this->title)}
                     {$this->getHintView()}
                 </td>
                 <td nowrap>
@@ -60,10 +60,10 @@ class Condition extends Text
         if ($request->get('update') !== 'Y') return $this;
 
         $moduleId = $request->get('mid');
-        if (!$moduleId) return $this;
+        if (!is_string($moduleId) || $moduleId === '') return $this;
 
         $value = $request->get($this->key);
-        if (!$value) return $this;
+        if ($value === null || $value === '') return $this;
 
         $tree = new CCatalogCondTree();
         $status = $tree->Init(BT_COND_MODE_PARSE, BT_COND_BUILD_CATALOG, [
@@ -81,8 +81,21 @@ class Condition extends Text
     {
         $value = Option::get($this->moduleId, $this->key, $this->default);
 
-        $this->value = is_null($value) ?
-            [] : unserialize(base64_decode($value));
+        if ($value === '') {
+            $this->value = [];
+            return $this;
+        }
+
+        $decoded = base64_decode($value, true);
+        if ($decoded === false) {
+            $this->value = [];
+            return $this;
+        }
+
+        $unserialized = @unserialize($decoded);
+        $this->value = ($unserialized !== false || $decoded === serialize(false))
+            ? $unserialized
+            : [];
 
         return $this;
     }

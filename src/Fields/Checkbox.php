@@ -17,20 +17,20 @@ class Checkbox extends Text
         return <<<HTML
             <tr>
                 <td>
-                    $this->title
+                    {$this->escape($this->title)}
                     {$this->getHintView()}
                 </td>
                 <td nowrap>
-                    <div id="$this->key-block">
-                        <div class="$this->key-container">
+                    <div id="{$this->escape($this->key)}-block">
+                        <div class="{$this->escape($this->key)}-container">
                             <div class="ui-ctl ui-ctl-checkbox {$this->getClassFromProps()}">
                                 {$this->getTagView()}
                                 <input  type="checkbox"
                                         class="ui-ctl-element"
-                                        name="$this->key"
-                                        value="$this->value"
-                                        placeholder="$this->placeholder"
-                                        autocomplete="$this->autocomplete"
+                                        name="{$this->escape($this->key)}"
+                                        value="{$this->escape($this->value)}"
+                                        placeholder="{$this->escape($this->placeholder)}"
+                                        autocomplete="{$this->escape($this->autocomplete)}"
                                         {$this->getCheckedView()}
                                         {$this->getDisabledView()}
                                         {$this->getReadonlyView()} />
@@ -55,7 +55,7 @@ class Checkbox extends Text
         if ($request->get('update') !== 'Y') return $this;
 
         $moduleId = $request->get('mid');
-        if (!$moduleId) return $this;
+        if (!is_string($moduleId)) return $this;
 
         $value = is_null($request->get($this->key)) ? 'N' : 'Y';
 

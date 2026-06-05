@@ -8,7 +8,7 @@ trait WithHint
 {
     public string $hint = '';
 
-    public function setHint($hint = ''): static
+    public function setHint(string $hint = ''): static
     {
         $this->hint = (string) $hint;
 
