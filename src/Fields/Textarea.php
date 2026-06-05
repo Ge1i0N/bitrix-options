@@ -14,16 +14,16 @@ class Textarea extends Text
 
     public ?int $cols = null;
 
-    public function cols($count): static
+    public function cols(int $count): static
     {
-        $this->cols = (int) $count;
+        $this->cols = $count;
 
         return $this;
     }
 
-    public function rows($count): static
+    public function rows(int $count): static
     {
-        $this->rows = (int) $count;
+        $this->rows = $count;
 
         return $this;
     }
@@ -40,22 +40,22 @@ class Textarea extends Text
         return <<<HTML
             <tr>
                 <td>
-                    $this->title
+                    {$this->escape((string)$this->title)}
                     {$this->getHintView()}
                 </td>
                 <td nowrap>
-                    <div id="$this->key-block">
-                        <div class="$this->key-container">
+                    <div id="{$this->escape($this->key)}-block">
+                        <div class="{$this->escape($this->key)}-container">
                             <div class="ui-ctl ui-ctl-textarea {$this->getClassFromProps()}">
                                 {$this->getTagView()}
                                 <textarea class="ui-ctl-element"
-                                        name="$this->key"
-                                        placeholder="$this->placeholder"
-                                        autocomplete="$this->autocomplete"
+                                        name="{$this->escape($this->key)}"
+                                        placeholder="{$this->escape($this->placeholder)}"
+                                        autocomplete="{$this->escape($this->autocomplete)}"
                                         {$this->getRowsView()}
                                         {$this->getColsView()}
                                         {$this->getDisabledView()}
-                                        {$this->getReadonlyView()} />$this->value</textarea>
+                                        {$this->getReadonlyView()} />{$this->escape($this->value)}</textarea>
                             </div>
                         </div>
                     </div>
@@ -73,14 +73,15 @@ class Textarea extends Text
 
     protected function getRowsView(): string
     {
-        return $this->rows ? sprintf('rows="%s"', $this->rows) : '';
+        return $this->rows !== null ? sprintf('rows="%s"', $this->rows) : '';
     }
 
     protected function getColsView(): string
     {
-        return $this->cols ? sprintf('cols="%s"', $this->cols) : '';
+        return $this->cols !== null ? sprintf('cols="%s"', $this->cols) : '';
     }
 
+    /** @return string[] */
     protected function getStyleClassProperties(): array
     {
         return array_merge(parent::getStyleClassProperties(), [

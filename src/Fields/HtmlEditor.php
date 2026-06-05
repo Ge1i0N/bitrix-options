@@ -10,6 +10,7 @@ use CFileMan;
 use Gelion\BitrixOptions\Traits\WithHint;
 use Gelion\BitrixOptions\Traits\WithModuleId;
 
+/** @phpstan-consistent-constructor */
 class HtmlEditor
 {
     use WithModuleId, WithHint;
@@ -18,20 +19,22 @@ class HtmlEditor
 
     public function __construct(
         public string $key,
-        public $title,
+        public string $title,
     ) {
     }
 
     public function fillValue(): static
     {
         $value = Option::get($this->moduleId, $this->key);
-        $unserialized = unserialize($value);
-        $this->value = $unserialized !== false ? $unserialized : ['type' => 'TEXT', 'value' => ''];
+        $unserialized = @unserialize($value);
+        $this->value = is_array($unserialized)
+            ? $unserialized
+            : ['type' => 'TEXT', 'value' => ''];
 
         return $this;
     }
 
-    public static function make($key, $title = null): static
+    public static function make(string $key, ?string $title = null): static
     {
         $class = new static($key, $title ?? $key);
 
@@ -48,7 +51,7 @@ class HtmlEditor
         if ($request->get('update') !== 'Y') return $this;
 
         $moduleId = $request->get('mid');
-        if (!$moduleId) return $this;
+        if (!is_string($moduleId) || $moduleId === '') return $this;
 
         $value = $request->get($this->key);
 
@@ -65,11 +68,14 @@ class HtmlEditor
     {
         ob_start();
 
+        /** @var array{value: mixed, type: string} $currentValue */
+        $currentValue = is_array($this->value) ? $this->value : [];
+
         CFileMan::AddHTMLEditorFrame(
             $this->key,
-            $this->value['value'] ?? '',
+            $currentValue['value'] ?? '',
             "{$this->key}_TYPE",
-            $this->value['type'] ?? 'text',
+            $currentValue['type'],
             [
                 'height' => '',
                 'width' => '100%',
@@ -85,15 +91,18 @@ class HtmlEditor
 
         $editor = ob_get_clean();
 
+        $escapedTitle = htmlspecialchars((string)$this->title, ENT_QUOTES, 'UTF-8');
+        $escapedKey = htmlspecialchars($this->key, ENT_QUOTES, 'UTF-8');
+
         return <<<HTML
             <tr>
                 <td>
-                    $this->title
+                    {$escapedTitle}
                     {$this->getHintView()}
                 </td>
                 <td nowrap>
-                    <div id="$this->key-block">
-                        <div class="$this->key-container">
+                    <div id="{$escapedKey}-block">
+                        <div class="{$escapedKey}-container">
                             $editor
                         </div>
                     </div>

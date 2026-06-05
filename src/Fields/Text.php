@@ -16,6 +16,7 @@ use Gelion\BitrixOptions\Traits\WithModuleId;
 use Gelion\BitrixOptions\Traits\WithStyleClass;
 use Gelion\BitrixOptions\Traits\WithTag;
 
+/** @phpstan-consistent-constructor */
 class Text
 {
     use WithModuleId, WithTag, WithHint, WithColor, WithStyleClass;
@@ -42,11 +43,11 @@ class Text
 
     public function __construct(
         public string $key,
-        public $title,
+        public string $title,
     ) {
     }
 
-    public function disabled($value = true): static
+    public function disabled(bool $value = true): static
     {
         $this->disabled = $value;
 
@@ -60,7 +61,7 @@ class Text
         return $this;
     }
 
-    public static function make($key, $title = null): static
+    public static function make(string $key, ?string $title = null): static
     {
         $class = new static($key, $title ?? $key);
 
@@ -77,30 +78,33 @@ class Text
         if ($request->get('update') !== 'Y') return $this;
 
         $moduleId = $request->get('mid');
-        if (!$moduleId) return $this;
+        if (!is_string($moduleId) || $moduleId === '') return $this;
 
         $value = $request->get($this->key);
+        if (!is_string($value)) {
+            $value = '';
+        }
 
         Option::set($moduleId, $this->key, $value);
 
         return $this;
     }
 
-    public function readonly($value = true): static
+    public function readonly(bool $value = true): static
     {
         $this->readonly = $value;
 
         return $this;
     }
 
-    public function setAutocomplete($autocomplete = 'off'): static
+    public function setAutocomplete(string $autocomplete = 'off'): static
     {
         $this->autocomplete = $autocomplete;
 
         return $this;
     }
 
-    public function setDefault($default): static
+    public function setDefault(mixed $default): static
     {
         $this->default = $default;
 
@@ -121,7 +125,7 @@ class Text
         return $this;
     }
 
-    public function setPlaceholder($placeholder = ''): static
+    public function setPlaceholder(string $placeholder = ''): static
     {
         $this->placeholder = (string) $placeholder;
 
@@ -142,25 +146,42 @@ class Text
         return $this;
     }
 
+    protected function escape(mixed $value): string
+    {
+        if (is_string($value)) {
+            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        }
+
+        if (is_int($value) || is_float($value)) {
+            return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+        }
+
+        if (is_bool($value)) {
+            return htmlspecialchars($value ? '1' : '', ENT_QUOTES, 'UTF-8');
+        }
+
+        return '';
+    }
+
     public function view(): string
     {
         return <<<HTML
             <tr>
                 <td>
-                    $this->title
+                    {$this->escape((string)$this->title)}
                     {$this->getHintView()}
                 </td>
                 <td nowrap>
-                    <div id="$this->key-block">
-                        <div class="$this->key-container">
+                    <div id="{$this->escape($this->key)}-block">
+                        <div class="{$this->escape($this->key)}-container">
                             <div class="ui-ctl ui-ctl-textbox {$this->getClassFromProps()}">
                                 {$this->getTagView()}
                                 <input  type="text"
                                         class="ui-ctl-element"
-                                        name="$this->key"
-                                        value="$this->value"
-                                        placeholder="$this->placeholder"
-                                        autocomplete="$this->autocomplete"
+                                        name="{$this->escape($this->key)}"
+                                        value="{$this->escape($this->value)}"
+                                        placeholder="{$this->escape($this->placeholder)}"
+                                        autocomplete="{$this->escape($this->autocomplete)}"
                                         {$this->getDisabledView()}
                                         {$this->getReadonlyView()} />
                             </div>
@@ -181,6 +202,9 @@ class Text
         return $this->readonly ? 'readonly' : '';
     }
 
+    /**
+     * @return string[]
+     */
     protected function getStyleClassProperties(): array
     {
         return [
